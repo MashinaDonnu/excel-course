@@ -4,20 +4,28 @@ const CODE = {
     Z: 90
 }
 
-function createColl(content) {
-    return `<div class="column">${content}</div>`
+function createColl(content, index) {
+    return `<div class="column" data-type="resizable" data-col-index="${index}">
+                ${content}
+                <div class="col-resize" data-resize="col"></div>
+           </div>`
 }
 
-function createCell() {
-    return `<div class="cell" contenteditable></div>`
+function createCell(_, index) {
+    return `<div class="cell" contenteditable data-cell-index="${index}"></div>`
 }
 
 
 function createRow(content, index) {
+    const resize = index ?
+        '<div class="row-resize" data-resize="row" ></div>' : ''
     return `
-        <div class="row">
-            <div class="row-info">${index ? index : ''}</div>
-            <div class="row-data">${content ? content : ''}</div>
+        <div class="row" data-type="resizable">
+            <div class="row-info" data-row-index="${index}" >
+                ${index ? index : ''}
+                ${resize}
+            </div>
+            <div class="row-data" data-row-data-index="${index}">${content ? content : ''}</div>
         </div>
     `
 }
@@ -37,7 +45,7 @@ export function createTable(rowsCount = 15) {
     rows.push(createRow(cols))
 
     for (let i = 0; i < rowsCount; i++) {
-        const cells = new Array(colsCount).fill(createCell()).join('')
+        const cells = new Array(colsCount).fill(null).map(createCell).join('')
         rows.push(createRow(cells, i + 1))
     }
 

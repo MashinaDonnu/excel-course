@@ -14,7 +14,9 @@
     "indent": "off",
     "quotes": "off",
     "operator-linebreak": "off",
-    "no-trailing-spaces": "off"
+    "no-trailing-spaces": "off",
+    "max-len": "off",
+    "no-inner-declarations": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
