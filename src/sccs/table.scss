@@ -71,7 +71,7 @@
     opacity: 0;
     bottom: 0;
     right: 0;
-
+    z-index: 100;
     &:hover {
       opacity: 1;
     }
@@ -94,5 +94,9 @@
     &:hover {
       cursor: row-resize;
     }
+  }
+
+  .active-resize {
+    opacity: 1;
   }
 }

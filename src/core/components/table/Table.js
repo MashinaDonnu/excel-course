@@ -1,5 +1,6 @@
 import {ExcelComponent} from "@core/ExcelComponent";
 import {createTable} from "@core/components/table/table.template";
+import {resizeHandler} from "@core/components/table/table.resize";
 
 export class Table extends ExcelComponent {
     static className = 'excel__table'
@@ -12,7 +13,10 @@ export class Table extends ExcelComponent {
 
     onMousedown(event) {
         if (event.target.dataset.resize) {
-            console.log('resize', event.target.dataset.resize)
+            const type = event.target.dataset.resize
+            const resize = event.target
+            const parent = event.target.closest('div[data-type="resizable"]')
+            resizeHandler(event, type, resize, parent, this.$root.$el)
         }
     }
 

@@ -28,6 +28,7 @@ class DOM {
         this.$el.removeEventListener(eventName, callback)
     }
 
+
     clear() {
         this.$el.innerHTML = ''
     }
