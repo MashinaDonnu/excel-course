@@ -28,6 +28,25 @@ class DOM {
         this.$el.removeEventListener(eventName, callback)
     }
 
+    find(selector) {
+        return $(this.$el.querySelector(selector))
+    }
+
+    get id() {
+      return this.$el.dataset.id
+    }
+
+    addClass(className) {
+        this.$el.classList.add(className)
+    }
+
+    haveClass(className) {
+        return this.$el.classList.contains(className)
+    }
+
+    removeClass(className) {
+        this.$el.classList.remove(className)
+    }
 
     clear() {
         this.$el.innerHTML = ''

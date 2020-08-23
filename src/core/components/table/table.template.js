@@ -11,8 +11,16 @@ function createColl(content, index) {
            </div>`
 }
 
-function createCell(_, index) {
-    return `<div class="cell" contenteditable data-cell-index="${index}"></div>`
+function createCell(rowIndex) {
+    return (_, index) => {
+        return `<div
+                    class="cell" 
+                    contenteditable 
+                    data-cell-index="${index}"
+                    data-id="${rowIndex}:${index}"
+                    data-type="cell" 
+                ></div>`
+    }
 }
 
 
@@ -45,7 +53,7 @@ export function createTable(rowsCount = 15) {
     rows.push(createRow(cols))
 
     for (let i = 0; i < rowsCount; i++) {
-        const cells = new Array(colsCount).fill(null).map(createCell).join('')
+        const cells = new Array(colsCount).fill(null).map(createCell(i)).join('')
         rows.push(createRow(cells, i + 1))
     }
 
