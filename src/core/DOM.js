@@ -11,7 +11,7 @@ class DOM {
         return this.$el.innerHTML.trim()
     }
     text(text) {
-        if (typeof text === 'string') {
+        if (typeof text !== 'undefined') {
             this.$el.textContent = text
         }
         if (this.$el.tagName.toLowerCase() === 'input') {
@@ -28,6 +28,14 @@ class DOM {
         } else {
             this.$el.appendChild(node)
         }
+    }
+
+    attr(name, value) {
+        if (value) {
+            this.$el.setAttribute(name, value)
+            return this
+        }
+        return this.$el.getAttribute(name)
     }
 
     get data() {
@@ -51,8 +59,23 @@ class DOM {
         return this.data.id
     }
 
+    getStyles(styles = []) {
+        return styles.reduce((acc, s) => {
+            acc[s] = this.$el.style[s]
+            return acc
+        }, {})
+    }
+
     find(selector) {
         return $(this.$el.querySelector(selector))
+    }
+
+    findAll(selector) {
+        return $(this.$el.querySelectorAll(selector))
+    }
+
+    each(fn) {
+        this.$el.forEach(fn)
     }
 
     addClass(className) {
@@ -78,6 +101,12 @@ class DOM {
         this.$el.removeEventListener(eventName, callback)
     }
 
+    css(styles = {}) {
+        Object.keys(styles).forEach( style => {
+            this.$el.style[style] = styles[style]
+        })
+        return this
+    }
 
     clear() {
         this.$el.innerHTML = ''

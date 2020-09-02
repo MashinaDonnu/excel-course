@@ -1,37 +1,44 @@
-import {ExcelComponent} from "@core/ExcelComponent";
+import {createToolbar} from "@core/components/toolbar/toolbar.tamplate";
+import {$} from "@core/DOM";
+import {ExcelStateComponent} from "@core/ExcelStateComponent";
+import {defaultStyles} from "@/constants";
 
-export class ToolBar extends ExcelComponent {
+export class ToolBar extends ExcelStateComponent {
     static className = 'excel__toolbar'
 
     constructor($root, options) {
         super($root, {
             name: 'ToolBar',
+            listeners: ['click'],
+            subscribe: ['currentStyles'],
             ...options
         });
     }
 
+    prepare() {
+        this.initState(defaultStyles)
+    }
+
+    storeChanged({currentStyles}) {
+        console.log('Changes: ', currentStyles)
+        this.setState(currentStyles)
+    }
+
+    onClick(event) {
+        const $target = $(event.target)
+        if ($target.data.type === 'button') {
+            const value = JSON.parse($target.data.value)
+            const key = Object.keys(value)[0]
+            this.$emit('toolbar:applyStyle', value)
+            this.setState({[key]: value[key]})
+        }
+    }
+
+    get template() {
+        return createToolbar(this.state)
+    }
+
     toHTML() {
-        return `
-
-            <div class="button">
-                <span class="material-icons">format_align_left</span>
-            </div>
-            <div class="button">
-                <span class="material-icons">format_align_center</span>
-            </div>
-            <div class="button">
-                <span class="material-icons">format_align_right</span>
-            </div>
-            <div class="button">
-                <span class="material-icons">format_bold</span>
-            </div>
-            <div class="button">
-                <span class="material-icons">format_italic</span>
-            </div>
-            <div class="button">
-                <span class="material-icons">format_underlined</span>
-            </div>
-
-        `
+        return this.template
     }
 }
