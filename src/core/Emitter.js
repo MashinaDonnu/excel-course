@@ -24,7 +24,7 @@
 
  // const emitter = new Emitter()
  // const unsubscribe = emitter.subscribe('test', (n) => {
- //     console.log('hello', n)
+
  // })
  //
  // emitter.emit('test', 1)

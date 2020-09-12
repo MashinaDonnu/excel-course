@@ -40,7 +40,6 @@ export function stylesToString(styles) {
 export function debounce(fn, delay = 300) {
     let timeout
     return function(...args) {
-        console.log('ARGS', ...args)
         const latter = () => {
             fn(...args)
             clearTimeout(timeout)

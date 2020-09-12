@@ -23,7 +23,6 @@ export class ExcelPage extends Page {
             storage(state) ? storage(state) : defaultState
         )
         const stateListener = debounce(state => {
-            console.log('STATE', storageName(this.params))
             storage(storageName(this.params), state)
         }, 500)
 

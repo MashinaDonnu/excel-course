@@ -20,7 +20,6 @@ export function rootReducer(state, action) {
             prevDataState[action.data.id] = action.data.value
             return {...state, currentText: action.data.value, dataState: prevDataState}
         case CURRENT_STYLES:
-            console.log(action.data)
             return {...state, currentStyles: action.data}
         case APPLY_STYLES:
             action.data.ids.forEach(id => {

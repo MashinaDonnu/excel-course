@@ -45,9 +45,7 @@ export class Header extends ExcelComponent {
         }
     }
 
-    storeChanged({tableName}) {
-        console.log('storeChanged', tableName)
-    }
+    storeChanged({tableName}) {}
 
     toHTML() {
         const {tableName} = this.store.getState()
