@@ -110,6 +110,7 @@ class DOM {
 
     clear() {
         this.$el.innerHTML = ''
+        return this
     }
 }
 
